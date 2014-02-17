@@ -19,10 +19,25 @@ class MavCompatibility(IPlugin):
         
         not_compatible = machines.filter(condition__condition_name='supported_major_os_upgrades').exclude(condition__condition_name='supported_major_os_upgrades', condition__condition_data__contains='10.9').count()
         
+        if not_compatible:
+            size = 3
+        else:
+            size = 0
+
         c = Context({
             'title': '10.9 Compatibility',
             'not_compatible': not_compatible,
             'page': page,
             'theid': theid
         })
-        return t.render(c), 3
+        return t.render(c), size
+        
+    def filter_machines(self, machines, data):
+        if data == 'notcompatible':
+            machines = machines.filter(condition__condition_name='supported_major_os_upgrades').exclude(condition__condition_name='supported_major_os_upgrades', condition__condition_data__contains='10.9')
+            title = 'Macs not compatible with OS X 10.9'
+        else:
+            machines = None
+            title = None
+        
+        return machines, title
