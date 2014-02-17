@@ -1,7 +1,9 @@
+{% if not_compatible > 0 %}
 <div class="span3">
     <legend>{{ title }}</legend>
-        <a href="#" class="btn btn-danger">
+        <a href="{% url 'machine_list_id' 'MavCompatibility' 'notcompatible' page theid %}" class="btn btn-danger">
             <span class="bigger"> {{ not_compatible }} </span><br />
             Not Compatible
         </a>
 </div>
+{% endif %}
