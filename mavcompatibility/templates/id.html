@@ -3,7 +3,7 @@
     <legend>{{ title }}</legend>
         <a href="{% url 'machine_list_id' 'MavCompatibility' 'notcompatible' page theid %}" class="btn btn-danger">
             <span class="bigger"> {{ not_compatible }} </span><br />
-            Not Compatible
+            <i class="fa fa-exclamation-triangle fa-2x"></i>
         </a>
 </div>
 {% endif %}
