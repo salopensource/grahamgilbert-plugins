@@ -5,24 +5,40 @@ from django.db.models import Count
 from server.models import *
 from django.shortcuts import get_object_or_404
 import server.utils as utils
+from django.conf import settings
 
 class Encryption(IPlugin):
     def show_widget(self, page, machines=None, theid=None):
+        
+        try:
+            show_desktops = settings.ENCRYPTION_SHOW_DESKTOPS
+        except:
+            show_desktops = True
+
         # The data is data is pulled from the database and passed to a template.
         
         # There are three possible views we're going to be rendering to - front, bu_dashbaord and group_dashboard. If page is set to bu_dashboard, or group_dashboard, you will be passed a business_unit or machine_group id to use (mainly for linking to the right search).
         if page == 'front':
-            t = loader.get_template('grahamgilbert/encryption/templates/front.html')
+            if show_desktops:
+                t = loader.get_template('grahamgilbert/encryption/templates/front_desktops.html')
+            else:
+                t = loader.get_template('grahamgilbert/encryption/templates/front_laptops.html')
             if not machines:
                 machines = Machine.objects.all()
         
         if page == 'bu_dashboard':
-            t = loader.get_template('grahamgilbert/encryption/templates/id.html')
+            if show_desktops:
+                t = loader.get_template('grahamgilbert/encryption/templates/id_desktops.html')
+            else:
+                t = loader.get_template('grahamgilbert/encryption/templates/id_laptops.html')
             if not machines:
                 machines = utils.getBUmachines(theid)
             
         if page == 'group_dashboard':
-            t = loader.get_template('grahamgilbert/encryption/templates/id.html')
+            if show_desktops:
+                t = loader.get_template('grahamgilbert/encryption/templates/id_desktops.html')
+            else:
+                t = loader.get_template('grahamgilbert/encryption/templates/id_laptops.html')
             if not machines:
                 machine_group = get_object_or_404(MachineGroup, pk=theid)
                 machines = Machine.objects.filter(machine_group=machine_group)
@@ -50,7 +66,7 @@ class Encryption(IPlugin):
             'theid': theid,
             'page': page
         })
-        return t.render(c), 5
+        return t.render(c), 4
     
     def filter_machines(self, machines, data):
         if data == 'laptopok':
