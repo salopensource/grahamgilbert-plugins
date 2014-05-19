@@ -33,7 +33,6 @@ class MemoryFree(IPlugin):
               memory_avg = HistoricalFact.objects.filter(machine=machine, fact_name='memoryfree_mb', fact_recorded__gte=time_90days).aggregate(Avg('fact_data'))
               if memory_avg['fact_data__avg'] != None:
                 memory_avg['fact_data__avg'] = int(memory_avg['fact_data__avg'])
-              print memory_avg['fact_data__avg']
               if memory_avg['fact_data__avg'] > 500 or memory_avg['fact_data__avg'] == None:
                 machines = machines.exclude(id=machine.id)
             mem_out = machines.count()
@@ -44,7 +43,6 @@ class MemoryFree(IPlugin):
           size = 0
         else:
           size = 3
-        print machines
         c = Context({
             'title': 'Low Free Memory',
             'count': mem_out,
@@ -62,7 +60,6 @@ class MemoryFree(IPlugin):
               memory_avg = HistoricalFact.objects.filter(machine=machine, fact_name='memoryfree_mb', fact_recorded__gte=time_90days).aggregate(Avg('fact_data'))
               if memory_avg['fact_data__avg'] != None:
                 memory_avg['fact_data__avg'] = int(memory_avg['fact_data__avg'])
-              print memory_avg['fact_data__avg']
               if memory_avg['fact_data__avg'] > 500 or memory_avg['fact_data__avg'] == None:
                 machines = machines.exclude(id=machine.id)
             title = 'Machines with an average of less than 500MB of memory free'
