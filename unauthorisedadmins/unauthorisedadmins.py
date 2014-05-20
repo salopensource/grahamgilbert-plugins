@@ -48,6 +48,8 @@ class UnauthorisedAdmins(IPlugin):
               if len(fact_list) == 0:
                 machines = machines.exclude(id=fact.machine.id)
               # if the list has a lenght of 0, remove the machine from the machines result
+            # remove machines that don't have any fact data
+            machines = machines.exclude(fact__fact_name='mac_admin_users', fact__fact_data='')
             count = machines.count()
         else:
           count = 0
