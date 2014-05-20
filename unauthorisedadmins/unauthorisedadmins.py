@@ -34,6 +34,9 @@ class UnauthorisedAdmins(IPlugin):
             facts = Fact.objects.filter(fact_name='mac_admin_users')
             for fact in facts:
               machine_id = fact.machine.id
+              if fact.fact_data == "":
+                fact_list.remove(item)
+                break
               # split the fact data into a list
               fact_list = fact.fact_data.split(', ')
               # for each item that's not root in fact data, see if it's in the list
@@ -78,6 +81,9 @@ class UnauthorisedAdmins(IPlugin):
             facts = Fact.objects.filter(fact_name='mac_admin_users')
             for fact in facts:
               machine_id = fact.machine.id
+              if fact.fact_data == "":
+                fact_list.remove(item)
+                break
               # split the fact data into a list
               fact_list = fact.fact_data.split(', ')
               # for each item that's not root in fact data, see if it's in the list
