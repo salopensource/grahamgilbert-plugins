@@ -1,10 +1,11 @@
 {% if count > 0 %}
 <div class="span3">
         <legend>{{ title }}</legend>
-          <a href="{% url 'machine_list_front' plugin 'under500' %}" class="text-center btn btn-danger">
+          <a href="{% url 'machine_list_front' plugin 'admins' %}" class="text-center btn btn-info">
 			<span class="bigger">{{ count }}</span><br />
 			{{ label }}
           </a>
+
 
 </div>
 {% endif %}

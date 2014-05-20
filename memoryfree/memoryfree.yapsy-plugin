@@ -1,9 +1,0 @@
-[Core]
-Name = MemoryFree
-Module = memoryfree
-
-[Documentation]
-Author = Graham Gilbert
-Version = 0.1
-Website = http://grahamgilbert.com
-Description = Shows machines with less than and average of 500MB free RAM.
