@@ -65,7 +65,7 @@ class UnauthorisedAdmins(IPlugin):
           label = "Admins"
 
         c = Context({
-            'title': 'Unathorised Admins',
+            'title': 'Admin Users',
             'count': count,
             'plugin': 'UnauthorisedAdmins',
             'theid': theid,
