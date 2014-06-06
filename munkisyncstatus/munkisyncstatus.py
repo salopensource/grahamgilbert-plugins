@@ -53,7 +53,6 @@ class MunkiSyncstatus(IPlugin):
             'plugin': 'MunkiSyncStatus',
             'theid': theid,
             'page': page,
-            'label': label
         })
         return t.render(c), size
 
