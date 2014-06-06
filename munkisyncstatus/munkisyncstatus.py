@@ -46,7 +46,7 @@ class MunkiSyncstatus(IPlugin):
         else:
             colour = 'danger'
         c = Context({
-            'title': 'Munki Software Repository',
+            'title': 'MSU Repository',
             'local_count': local,
             'local_label': 'Local',
             'cloud_count': cloud,
