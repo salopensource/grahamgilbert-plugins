@@ -10,7 +10,7 @@
             {{ cloud_label }}
           </a>
 
-          <a href="{% url 'machine_list_id' plugin 'out-of-sync' page theid %}" class="text-center btn btn-alert">
+          <a href="{% url 'machine_list_id' plugin 'out-of-sync' page theid %}" class="text-center btn btn-{{ colour }}">
             <span class="bigger">{{ oos_count }}</span><br />
             {{ oos_label }}
           </a>

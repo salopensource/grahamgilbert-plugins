@@ -41,7 +41,10 @@ class MunkiSyncstatus(IPlugin):
           out_of_sync = 0
 
         size = 3
-
+        if out_of_sync == 0:
+            colour = 'info'
+        else:
+            colour = 'danger'
         c = Context({
             'title': 'Munki Software Repository',
             'local_count': local,
@@ -52,6 +55,7 @@ class MunkiSyncstatus(IPlugin):
             'oos_label': 'Out of sync',
             'plugin': 'MunkiSyncStatus',
             'theid': theid,
+            'colour': colour,
             'page': page
         })
         return t.render(c), size
