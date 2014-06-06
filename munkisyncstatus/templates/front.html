@@ -1,0 +1,19 @@
+<div class="span3">
+        <legend>{{ title }}</legend>
+          <a href="{% url 'machine_list_front' plugin 'local' %}" class="text-center btn btn-info">
+			<span class="bigger">{{ local_count }}</span><br />
+			{{ local_label }}
+          </a>
+
+          <a href="{% url 'machine_list_front' plugin 'cloud' %}" class="text-center btn btn-info">
+            <span class="bigger">{{ cloud_count }}</span><br />
+            {{ cloud_label }}
+          </a>
+
+          <a href="{% url 'machine_list_front' plugin 'out-of-sync' %}" class="text-center btn btn-alert">
+            <span class="bigger">{{ oos_count }}</span><br />
+            {{ oos_label }}
+          </a>
+
+
+</div>

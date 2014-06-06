@@ -1,0 +1,1 @@
+# Munki Sync Status
