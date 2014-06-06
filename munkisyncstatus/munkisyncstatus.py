@@ -52,7 +52,7 @@ class MunkiSyncstatus(IPlugin):
             'oos_label': 'Out of sync',
             'plugin': 'MunkiSyncStatus',
             'theid': theid,
-            'page': page,
+            'page': page
         })
         return t.render(c), size
 
