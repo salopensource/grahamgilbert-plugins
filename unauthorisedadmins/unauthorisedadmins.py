@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 import server.utils as utils
 from django.conf import settings
 from datetime import datetime, timedelta
+from django.db.models import Q
 
 class UnauthorisedAdmins(IPlugin):
     def show_widget(self, page, machines=None, theid=None):
@@ -31,26 +32,28 @@ class UnauthorisedAdmins(IPlugin):
                 machines = Machine.objects.filter(machine_group=machine_group)
 
         if machines:
-            facts = Fact.objects.filter(fact_name='mac_admin_users')
-            for fact in facts:
-              machine_id = fact.machine.id
-              if fact.fact_data == "":
-                fact_list.remove(item)
-                break
-              # split the fact data into a list
-              fact_list = fact.fact_data.split(', ')
-              # for each item that's not root in fact data, see if it's in the list
-              for allowed_admin in authorised_admins:
-                for item in fact_list:
-                  if str(item) == str(allowed_admin):
-                    fact_list.remove(item)
-                    break
-              if len(fact_list) == 0:
-                machines = machines.exclude(id=fact.machine.id)
-              # if the list has a lenght of 0, remove the machine from the machines result
-            # remove machines that don't have any fact data
-            machines = machines.filter(fact__fact_name='mac_admin_users')
-            count = machines.count()
+          unwanted = []
+          facts = Fact.objects.filter(fact_name='mac_admin_users').prefetch_related('machine')
+          for fact in facts:
+            if fact.fact_data == "":
+              fact_list.remove(item)
+              break
+            # split the fact data into a list
+            fact_list = fact.fact_data.split(', ')
+            # for each item that's not root in fact data, see if it's in the list
+            for allowed_admin in authorised_admins:
+              for item in fact_list:
+                if str(item) == str(allowed_admin):
+                  fact_list.remove(item)
+                  break
+            if len(fact_list) == 0:
+              unwanted.append(fact.machine)
+              #machines = machines.exclude(id=fact.machine.id)
+            # if the list has a lenght of 0, remove the machine from the machines result
+          # remove machines that don't have any fact data
+          machines = machines.exclude(id__in=[o.id for o in unwanted])
+          machines = machines.filter(fact__fact_name='mac_admin_users')
+          count = machines.count()
         else:
           count = 0
 
@@ -82,7 +85,6 @@ class UnauthorisedAdmins(IPlugin):
               authorised_admins.extend(['root'])
             facts = Fact.objects.filter(fact_name='mac_admin_users')
             for fact in facts:
-              machine_id = fact.machine.id
               if fact.fact_data == "":
                 fact_list.remove(item)
                 break
