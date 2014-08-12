@@ -10,10 +10,7 @@ from datetime import datetime, timedelta
 
 class MunkiSyncstatus(IPlugin):
     def show_widget(self, page, machines=None, theid=None):
-        authorised_admins = settings.AUTHORISED_ADMINS
-        # root will always be an admin (or it should!)
-        if 'root' not in authorised_admins:
-          authorised_admins.extend(['root'])
+
         if page == 'front':
             t = loader.get_template('grahamgilbert/munkisyncstatus/templates/front.html')
             if not machines:

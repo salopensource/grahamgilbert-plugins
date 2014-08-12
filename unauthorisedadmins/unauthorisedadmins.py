@@ -11,7 +11,10 @@ from django.db.models import Q
 
 class UnauthorisedAdmins(IPlugin):
     def show_widget(self, page, machines=None, theid=None):
-        authorised_admins = settings.AUTHORISED_ADMINS
+        try:
+          authorised_admins = settings.AUTHORISED_ADMINS
+        except:
+          authorised_admins = []
         # root will always be an admin (or it should!)
         if 'root' not in authorised_admins:
           authorised_admins.extend(['root'])
