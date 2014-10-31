@@ -1,4 +1,4 @@
-sal-plugins
+grahamgilbert-plugins
 ===========
 
 Plugins for Sal (The Munki Puppet).
@@ -9,5 +9,5 @@ Change into your ``plugins`` directory of your Sal install (if you followed the 
 
 ``` bash
 $ cd /usr/local/sal_env/sal/plugins
-$ git clone https://github.com/grahamgilbert/sal-plugins.git grahamgilbert
+$ git clone https://github.com/salsoftware/grahamgilbert-plugins.git grahamgilbert
 ```
