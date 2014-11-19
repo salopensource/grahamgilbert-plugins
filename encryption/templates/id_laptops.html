@@ -1,5 +1,10 @@
-<div class="span4">
-        <legend>{{ title }}</legend>
+<div class="col-md-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {{ title }}
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
           <a href="{% url 'machine_list_id' plugin 'laptopok' page theid %}" title="{{ laptop_label }}" class="btn btn-success">
 			<span class="bigger">{{ laptop_ok_count }}</span><br />
 			<i class="fa fa-laptop fa-3x"></i>
@@ -9,4 +14,6 @@
 			<span class="bigger">{{ laptop_alert_count }}</span><br />
 			<i class="fa fa-laptop fa-3x"></i>
           </a>
+</div>
+</div>
 </div>

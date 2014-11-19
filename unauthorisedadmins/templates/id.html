@@ -1,9 +1,16 @@
 {% if count > 0 %}
-<div class="span3">
-        <legend>{{ title }}</legend>
+<div class="col-md-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {{ title }}
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
           <a href="{% url 'machine_list_id' plugin 'admins' page theid %}" title="{{ laptop_label }}" class="btn btn-info">
           <span class="bigger">{{ count }}</span><br />
           {{ label }}
           </a>
+</div>
+</div>
 </div>
 {% endif %}
