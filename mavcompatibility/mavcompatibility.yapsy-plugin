@@ -1,9 +1,0 @@
-[Core]
-Name = MavCompatibility
-Module = mavcompatibility
-
-[Documentation]
-Author = Graham Gilbert
-Version = 0.1
-Website = http://grahamgilbert.com
-Description = Displays macs that aren't compatible with 10.9.

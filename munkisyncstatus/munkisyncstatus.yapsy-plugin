@@ -1,9 +1,0 @@
-[Core]
-Name = MunkiSyncStatus
-Module = munkisyncstatus
-
-[Documentation]
-Author = Graham Gilbert
-Version = 0.1
-Website = http://grahamgilbert.com
-Description = Reports where Munki clients are retrieving their updates from
