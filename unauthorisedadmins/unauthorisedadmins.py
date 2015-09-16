@@ -55,7 +55,7 @@ class UnauthorisedAdmins(IPlugin):
             # if the list has a lenght of 0, remove the machine from the machines result
           # remove machines that don't have any fact data
           machines = machines.exclude(id__in=[o.id for o in unwanted])
-          machines = machines.filter(fact__fact_name='mac_admin_users')
+          machines = machines.filter(facts__fact_name='mac_admin_users')
           count = machines.count()
         else:
           count = 0
@@ -102,7 +102,7 @@ class UnauthorisedAdmins(IPlugin):
               if len(fact_list) == 0:
                 machines = machines.exclude(id=fact.machine.id)
             title = 'Machines with Admin users'
-            machines = machines.filter(fact__fact_name='mac_admin_users')
+            machines = machines.filter(facts__fact_name='mac_admin_users')
         else:
             machines = None
             title = None
