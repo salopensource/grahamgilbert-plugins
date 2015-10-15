@@ -1,0 +1,19 @@
+<div class="col-md-4">
+    <div class="panel panel-default panel-traffic-light">
+        <div class="panel-heading">
+            {{ title }}
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <a href="{% url 'machine_list_id' plugin 'oncorp' page theid %}" title="{{ laptop_label }}" class="btn btn-info">
+            <span class="bigger">{{ oncorp_count }}</span><br />
+            {{ oncorp_label }}
+          </a>
+
+          <a href="{% url 'machine_list_id' plugin 'offcorp' page theid %}" title="{{ laptop_label }}" class="btn btn-info">
+            <span class="bigger">{{ offcorp_count }}</span><br />
+            {{ offcorp_label }}
+          </a>
+        </div>
+      </div>
+</div>

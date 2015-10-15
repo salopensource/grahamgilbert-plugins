@@ -1,0 +1,9 @@
+[Core]
+Name = OnCorp
+Module = oncorp
+
+[Documentation]
+Author = Graham Gilbert
+Version = 0.1
+Website = http://grahamgilbert.com
+Description = Displays on corp macs
