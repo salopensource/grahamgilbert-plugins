@@ -5,7 +5,10 @@ from django.db.models import Count
 from server.models import *
 
 class MavCompatibility(IPlugin):
-    def show_widget(self, page, machines=None, theid=None):
+    def widget_width(sel):
+        return 4
+
+    def widget_content(self, page, machines=None, theid=None):
 
         if page == 'front':
             t = loader.get_template('grahamgilbert/mavcompatibility/templates/front.html')
@@ -30,7 +33,7 @@ class MavCompatibility(IPlugin):
             'page': page,
             'theid': theid
         })
-        return t.render(c), size
+        return t.render(c)
         
     def filter_machines(self, machines, data):
         if data == 'notcompatible':

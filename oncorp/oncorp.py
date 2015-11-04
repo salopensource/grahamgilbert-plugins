@@ -11,7 +11,10 @@ class OnCorp(IPlugin):
     def plugin_type(self):
         return 'condition'
 
-    def show_widget(self, page, machines=None, theid=None):
+    def widget_width(self):
+        return 4
+
+    def widget_content(self, page, machines=None, theid=None):
 
         if page == 'front':
             t = loader.get_template('grahamgilbert/oncorp/templates/front.html')
@@ -22,10 +25,10 @@ class OnCorp(IPlugin):
         if page == 'group_dashboard':
             t = loader.get_template('grahamgilbert/oncorp/templates/id.html')
 
-        if machines:
+        try:
             oncorp = machines.filter(conditions__condition_name='on_corp', conditions__condition_data='True').count()
             offcorp = machines.filter(conditions__condition_name='on_corp', conditions__condition_data='False').count()
-        else:
+        except:
             oncorp = 0
             offcorp = 0
 
@@ -39,7 +42,7 @@ class OnCorp(IPlugin):
             'theid': theid,
             'page': page
         })
-        return t.render(c), 4
+        return t.render(c)
 
     def filter_machines(self, machines, data):
         if data == 'oncorp':

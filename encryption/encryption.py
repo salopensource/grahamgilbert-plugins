@@ -8,7 +8,10 @@ import server.utils as utils
 from django.conf import settings
 
 class Encryption(IPlugin):
-    def show_widget(self, page, machines=None, theid=None):
+    def widget_width(self):
+        return 4
+        
+    def widget_content(self, page, machines=None, theid=None):
 
         try:
             show_desktops = settings.ENCRYPTION_SHOW_DESKTOPS
@@ -23,35 +26,36 @@ class Encryption(IPlugin):
                 t = loader.get_template('grahamgilbert/encryption/templates/front_desktops.html')
             else:
                 t = loader.get_template('grahamgilbert/encryption/templates/front_laptops.html')
-            if not machines:
-                machines = Machine.objects.all()
 
         if page == 'bu_dashboard':
             if show_desktops:
                 t = loader.get_template('grahamgilbert/encryption/templates/id_desktops.html')
             else:
                 t = loader.get_template('grahamgilbert/encryption/templates/id_laptops.html')
-            if not machines:
-                machines = utils.getBUmachines(theid)
 
         if page == 'group_dashboard':
             if show_desktops:
                 t = loader.get_template('grahamgilbert/encryption/templates/id_desktops.html')
             else:
                 t = loader.get_template('grahamgilbert/encryption/templates/id_laptops.html')
-            if not machines:
-                machine_group = get_object_or_404(MachineGroup, pk=theid)
-                machines = Machine.objects.filter(machine_group=machine_group)
 
-        if machines:
+        try:
             laptop_ok = machines.filter(facts__fact_name='mac_encryption_enabled', facts__fact_data='true').filter(facts__fact_name='mac_laptop', facts__fact_data='mac_laptop').count()
-            desktop_ok = machines.filter(facts__fact_name='mac_encryption_enabled', facts__fact_data__exact='true').filter(facts__fact_name='mac_laptop', facts__fact_data__exact='mac_desktop').count()
-            laptop_alert = machines.filter(facts__fact_name='mac_encryption_enabled', facts__fact_data__exact='false').filter(facts__fact_name='mac_laptop', facts__fact_data__exact='mac_laptop').count()
-            desktop_alert = machines.filter(facts__fact_name='mac_encryption_enabled', facts__fact_data__exact='false').filter(facts__fact_name='mac_laptop', facts__fact_data__exact='mac_desktop').count()
-        else:
+        except:
             laptop_ok = 0
+        try:
+            desktop_ok = machines.filter(facts__fact_name='mac_encryption_enabled', facts__fact_data__exact='true').filter(facts__fact_name='mac_laptop', facts__fact_data__exact='mac_desktop').count()
+        except:
             desktop_ok = 0
+
+        try:
+            laptop_alert = machines.filter(facts__fact_name='mac_encryption_enabled', facts__fact_data__exact='false').filter(facts__fact_name='mac_laptop', facts__fact_data__exact='mac_laptop').count()
+        except:
             laptop_alert = 0
+
+        try:
+            desktop_alert = machines.filter(facts__fact_name='mac_encryption_enabled', facts__fact_data__exact='false').filter(facts__fact_name='mac_laptop', facts__fact_data__exact='mac_desktop').count()
+        except: 
             desktop_alert = 0
 
         c = Context({
@@ -66,7 +70,7 @@ class Encryption(IPlugin):
             'theid': theid,
             'page': page
         })
-        return t.render(c), 4
+        return t.render(c)
 
     def filter_machines(self, machines, data):
         if data == 'laptopok':

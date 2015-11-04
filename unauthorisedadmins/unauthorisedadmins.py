@@ -10,7 +10,10 @@ from datetime import datetime, timedelta
 from django.db.models import Q
 
 class UnauthorisedAdmins(IPlugin):
-    def show_widget(self, page, machines=None, theid=None):
+    def widget_width(self):
+        return 4
+
+    def widget_content(self, page, machines=None, theid=None):
         try:
           authorised_admins = settings.AUTHORISED_ADMINS
         except:
@@ -78,7 +81,7 @@ class UnauthorisedAdmins(IPlugin):
             'page': page,
             'label': label
         })
-        return t.render(c), size
+        return t.render(c)
 
     def filter_machines(self, machines, data):
         if data == 'admins':
