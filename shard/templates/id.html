@@ -1,0 +1,22 @@
+
+    <div class="panel panel-default panel-traffic-light">
+        <div class="panel-heading">
+            {{ title }}
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <a href="{% url 'machine_list_id' plugin 's1' page theid %}" title="Machines in shard 1" class="btn btn-info">
+            <span class="bigger">{{ s1 }}</span><br />
+            Shard 1
+          </a>
+
+          <a href="{% url 'machine_list_id' plugin 's2' page theid %}" title="Machines in shard 2" class="btn btn-info">
+            <span class="bigger">{{ s2 }}</span><br />
+            Shard 2
+          </a>
+          <a href="{% url 'machine_list_id' plugin 's3' page theid %}" title="Machines in shard 3" class="btn btn-info">
+            <span class="bigger">{{ s3 }}</span><br />
+            Shard 3
+          </a>
+        </div>
+      </div>

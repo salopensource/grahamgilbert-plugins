@@ -1,0 +1,22 @@
+
+    <div class="panel panel-default panel-traffic-light">
+        <div class="panel-heading">
+            {{ title }}
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <a href="{% url 'machine_list_front' plugin 's1' %}" class="text-center btn btn-info">
+            <span class="bigger">{{ s1 }}</span><br />
+            Shard 1
+          </a>
+
+          <a href="{% url 'machine_list_front' plugin 's2' %}" class="text-center btn btn-info">
+            <span class="bigger">{{ s2 }}</span><br />
+            Shard 2
+          </a>
+          <a href="{% url 'machine_list_front' plugin 's3' %}" class="text-center btn btn-info">
+            <span class="bigger">{{ s3 }}</span><br />
+            Shard 3
+          </a>
+        </div>
+      </div>
