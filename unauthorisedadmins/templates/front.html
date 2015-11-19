@@ -1,10 +1,18 @@
 {% if count > 0 %}
-<div class="span3">
-        <legend>{{ title }}</legend>
-          <a href="{% url 'machine_list_front' plugin 'admins' %}" class="text-center btn btn-info">
-			<span class="bigger">{{ count }}</span><br />
-			{{ label }}
-          </a>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {{ title }}
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+        {% if count == 0 %}
+        <a href="{% url 'machine_list_front' plugin 'admins' %}" class="btn btn-success">
+        {% else %}
+        <a href="{% url 'machine_list_front' plugin 'admins' %}" class="text-center btn btn-info">
+        {% endif %}
+  			<span class="bigger"> {{ count }} </span><br />
+  			{{ label }}
+         </a>
 
 
 </div>
