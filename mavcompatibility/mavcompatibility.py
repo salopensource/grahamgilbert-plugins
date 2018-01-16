@@ -5,7 +5,7 @@ from django.db.models import Count
 from server.models import *
 
 class MavCompatibility(IPlugin):
-    def widget_width(sel):
+    def widget_width(self):
         return 4
 
     def widget_content(self, page, machines=None, theid=None):
